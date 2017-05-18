@@ -11,12 +11,16 @@ const PAGE_TOKEN = config.PAGE_TOKEN;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get('/test/', (req, res) => {
+  res.send('Just for test');
+});
+
 app.get('/webhook/', (req, res) => {
   if (req.query['hub.verify_token'] === VERIFY_TOKEN) {
     res.send(req.query['hub.challenge']);
   }
   res.send('Error, wrong validation token');
-})
+});
 
 app.post('/webhook/', (req, res) => {
 
